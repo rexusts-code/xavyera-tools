@@ -145,6 +145,18 @@ def handle_slash_command(command: str, ui: LuminaUI, agent: LuminaAgent, quota: 
         ui.info("Theme selection menu reopened.")
         ui.welcome() # Re-show welcome and style menu
         return True
+    elif cmd == "/apitoken":
+        ui.console.print("\n[bold cyan]Set API Token[/bold cyan]")
+        p_choice = click.prompt("Select Provider", type=click.Choice(['gemini', 'anthropic', 'openai', 'openrouter', 'groq']))
+        new_key = click.prompt(f"Enter {p_choice.upper()} API Key", hide_input=True)
+        
+        env_key = f"{p_choice.upper()}_API_KEY"
+        with open(".env", "a") as f:
+            f.write(f"\n{env_key}={new_key}\n")
+        
+        os.environ[env_key] = new_key
+        ui.info(f"API Token for {p_choice.upper()} updated successfully!")
+        return True
     elif cmd == "/exit":
         ui.info("Goodbye!")
         sys.exit(0)

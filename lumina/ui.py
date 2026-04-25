@@ -122,6 +122,7 @@ class LuminaUI:
 - **`/code`**: Enter Elite Architect Mode.
 - **`/plan`**: Enter Planning Mode.
 - **`/config`**: Show current settings.
+- **`/apitoken`**: Set or update API tokens.
 - **`/theme`**: Reopen theme selection.
 - **`/rewind`**: Undo the last turn.
 - **`/status`**: Show status & quota.
