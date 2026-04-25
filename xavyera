@@ -1,0 +1,3 @@
+#!/bin/bash
+export PYTHONPATH="/home/xavyera/Documents/ai/.libs:$PYTHONPATH"
+python3 /home/xavyera/Documents/ai/main.py "$@"

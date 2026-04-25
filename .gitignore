@@ -1,0 +1,5 @@
+.libs/
+.env
+__pycache__/
+venv/
+.xavyera_usage.json
