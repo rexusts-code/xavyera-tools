@@ -6,9 +6,9 @@
 echo "⚠️  Uninstalling Xavyera Code..."
 
 # 1. Remove the global command
-if [ -f ~/.local/bin/xavyera ]; then
-    rm ~/.local/bin/xavyera
-    echo "🗑️  Removed xavyera CLI command."
+if [ -f "$HOME/.local/bin/xavyera" ]; then
+    rm "$HOME/.local/bin/xavyera"
+    echo "🗑️  Removed global command: $HOME/.local/bin/xavyera"
 fi
 
 # 2. Remove usage tracking data
