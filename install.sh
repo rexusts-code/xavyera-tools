@@ -26,7 +26,7 @@ pip3 install --target .libs rich click pydantic python-dotenv requests duckduckg
 # 3. Create .env if missing
 if [ ! -f .env ]; then
     echo "🔑 Configuring API Key..."
-    read -p "Enter your Gemini API Key (get it at aistudio.google.com): " api_key
+    read -p "Enter your Gemini API Key (get it at aistudio.google.com): " api_key < /dev/tty
     echo "GEMINI_API_KEY=$api_key" > .env
     echo "LUMINA_PROVIDER=gemini" >> .env
     echo "LUMINA_MODEL=gemini-1.5-flash" >> .env

@@ -30,25 +30,48 @@ def get_provider():
     p_name = os.getenv("LUMINA_PROVIDER", "gemini").lower()
     model = os.getenv("LUMINA_MODEL")
     
+    key = None
     if p_name == "gemini":
         key = os.getenv("GEMINI_API_KEY")
-        if not key: raise Exception("GEMINI_API_KEY missing")
+        if not key:
+            print("\n[bold red]Authentication Required[/bold red]")
+            key = click.prompt("Enter your Gemini API Key", hide_input=True)
+            with open(".env", "a") as f:
+                f.write(f"\nGEMINI_API_KEY={key}\n")
+            os.environ["GEMINI_API_KEY"] = key
         return GeminiProvider(key, model or "gemini-1.5-flash")
     elif p_name == "anthropic":
         key = os.getenv("ANTHROPIC_API_KEY")
-        if not key: raise Exception("ANTHROPIC_API_KEY missing")
+        if not key:
+            key = click.prompt("Enter your Anthropic API Key", hide_input=True)
+            with open(".env", "a") as f:
+                f.write(f"\nANTHROPIC_API_KEY={key}\n")
+            os.environ["ANTHROPIC_API_KEY"] = key
         return AnthropicProvider(key, model or "claude-3-5-sonnet-20240620")
+    # ... handle other providers similarly if needed
     elif p_name == "openai":
         key = os.getenv("OPENAI_API_KEY")
-        if not key: raise Exception("OPENAI_API_KEY missing")
+        if not key:
+            key = click.prompt("Enter your OpenAI API Key", hide_input=True)
+            with open(".env", "a") as f:
+                f.write(f"\nOPENAI_API_KEY={key}\n")
+            os.environ["OPENAI_API_KEY"] = key
         return OpenAIProvider(key, model or "gpt-4o")
     elif p_name == "openrouter":
         key = os.getenv("OPENROUTER_API_KEY")
-        if not key: raise Exception("OPENROUTER_API_KEY missing")
+        if not key:
+            key = click.prompt("Enter your OpenRouter API Key", hide_input=True)
+            with open(".env", "a") as f:
+                f.write(f"\nOPENROUTER_API_KEY={key}\n")
+            os.environ["OPENROUTER_API_KEY"] = key
         return OpenRouterProvider(key, model or "anthropic/claude-3.5-sonnet")
     elif p_name == "groq":
         key = os.getenv("GROQ_API_KEY")
-        if not key: raise Exception("GROQ_API_KEY missing")
+        if not key:
+            key = click.prompt("Enter your Groq API Key", hide_input=True)
+            with open(".env", "a") as f:
+                f.write(f"\nGROQ_API_KEY={key}\n")
+            os.environ["GROQ_API_KEY"] = key
         return GroqProvider(key, model or "llama3-70b-8192")
     elif p_name == "ollama":
         return OllamaProvider(model or "llama3")
